@@ -1,16 +1,47 @@
 # watchacha
 
-A new Flutter project.
+link: https://letsummer.github.io/watchacha/
 
-## Getting Started
+## gh-pages 배포 자동화 방법
 
-This project is a starting point for a Flutter application.
+**출처: https://velog.io/@moseoridev/Flutter-%EC%95%B1-GitHub-Pages%EC%97%90-%EB%B0%B0%ED%8F%AC%ED%95%B4%EB%B3%B4%EC%9E%90**
 
-A few resources to get you started if this is your first Flutter project:
+**/.github/workflows** 에 **workflow.yml** 생성.
+```
+name: gh-pages
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+on:
+  push:
+    branches: [your-branch]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /your-repo-name/
+```
+
+
+|  | 변수 | 수정사항 |
+| --- | --- | --- |
+| 1 | `your-branch` | `main` 또는 `master`. 현재 `main`이 기본 최상위 branch. |
+| 2 | `your-repo-name` | 자동화를 할 repository명. |
+
+작업을 완료하면
+
+***해당 repository - settings - pages*** 에서 ghpage 경로 설정.
+
+
+> [!WARNING]
+> workflow build fail 에서 403 에러가 나는 경우
+> 
+> ***해당 Repository - Settings - Actions - General*** 에서 ***Workflow permissions*** 이
+>
+> **Read and write permissions**로 되어있는지 확인.
+> 
+> 참고 링크: https://github.com/ad-m/github-push-action/issues/96#issuecomment-1647904286
