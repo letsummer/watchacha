@@ -40,8 +40,8 @@ jobs:
 > [!WARNING]
 > workflow build fail 에서 403 에러가 나는 경우
 > 
-> ***해당 Repository - Settings - Actions - General*** 에서 ***Workflow permissions*** 이
+> ***해당 Repository - Settings - Actions - General*** 에서 ***Workflow permissions*** 을
 >
-> **Read and write permissions**로 되어있는지 확인.
+> **Read and write permissions**로 변경.
 > 
 > 참고 링크: https://github.com/ad-m/github-push-action/issues/96#issuecomment-1647904286
