@@ -1,37 +1,17 @@
-# https://origogi.github.io/flutter/Flutter-Github-%EC%97%B0%EB%8F%99/
-name: Flutter Web
+#https://velog.io/@moseoridev/Flutter-%EC%95%B1-GitHub-Pages%EC%97%90-%EB%B0%B0%ED%8F%AC%ED%95%B4%EB%B3%B4%EC%9E%90
+name: gh-pages
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+
 jobs:
   build:
-    name: Build Web
-    env:
-      my_secret: $
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
+      - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          channel: 'dev'
-      - run: flutter config --enable-web
-      - run: flutter pub get
-      - run: flutter build web --release
-        # 1. change path which exist lib/main.dart
-        working-directory: ./watchacha
-      - run: |
-          # 2. change path to [existed lib/main.dart path]/build/web
-          cd watchacha/build/web
-          git init
-           # 3. change your email
-          git config --global user.email letsummerparty@gmail.com
-          # 4. change your name
-          git config --global user.name letsummer
-          git status
-          # 5. change your repository
-          git remote add origin https://github.com/letsummer/watchacha.git
-          git checkout -b gh-pages
-          git add --all
-          git commit -m "update"
-          git push origin gh-pages -f
+          baseHref: /watchacha/
